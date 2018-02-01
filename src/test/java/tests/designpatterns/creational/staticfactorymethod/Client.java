@@ -8,7 +8,7 @@ public class Client {
 
 	@Test
 	public void test() {
-		Knight knight = Knight.getInstance();
+		Knight knight = Knight.getDragonKnight();
 		System.out.println(knight);
 	}
 
