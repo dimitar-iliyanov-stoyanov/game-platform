@@ -1,4 +1,4 @@
-package designpatterns.creational.staticfactorymethodcopy;
+package designpatterns.behaviour.templatemethod;
 
 import java.util.Arrays;
 import java.util.List;
