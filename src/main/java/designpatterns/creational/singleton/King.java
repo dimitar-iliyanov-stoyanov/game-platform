@@ -2,16 +2,18 @@ package designpatterns.creational.singleton;
 
 public class King {
 
-	private static King instance;
-
 	private King() {}
 
-	public static King getInstance() {
-		if (instance == null) {
-			instance = new King();
-		}
+	private static class LazyHolder {
+		private static final King INSTANCE = new King();
+	}
 
-		return instance; 
+	public static King getInstance() {
+		return LazyHolder.INSTANCE; 
+	}
+
+	public void doSomething() {
+		System.out.println("Singleton doing something!");
 	}
 
 }
