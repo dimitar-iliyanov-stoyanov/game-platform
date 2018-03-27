@@ -2,9 +2,14 @@ package datastructures.singlylinkedlist;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class Client {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void testAddAndGet() {
@@ -17,13 +22,57 @@ public class Client {
 	@Test
 	public void testAddWithIndexAndGetWithIndex() {
 		SinglyLinkedList sll = new SinglyLinkedList();
-		sll.add(10);
-		sll.add(11);
-		sll.add(9, 0);
 
+		sll.add(10);
+		assertEquals(10, sll.get(0));
+
+		sll.add(9, 0);
 		assertEquals(9, sll.get(0));
 		assertEquals(10, sll.get(1));
-		assertEquals(11, sll.get(2));
+
+		thrown.expect(RuntimeException.class);
+		sll.get(2);
+	}
+
+	@Test
+	public void testSet() {
+		SinglyLinkedList sll = new SinglyLinkedList();
+
+		sll.add(10);
+		assertEquals(10, sll.get());
+
+		sll.set(9, 0);
+		assertEquals(9, sll.get());
+	}
+
+	@Test
+	public void testRemoveLastElem() {
+		SinglyLinkedList sll = new SinglyLinkedList();
+
+		sll.add(9);
+		sll.add(10);
+		assertEquals(9, sll.get(0));
+		assertEquals(10, sll.get(1));
+
+		sll.remove(1);
+		assertEquals(9, sll.get(0));
+		thrown.expect(RuntimeException.class);
+		assertEquals(10, sll.get(1));
+	}
+
+	@Test
+	public void testRemoveFirstElem() {
+		SinglyLinkedList sll = new SinglyLinkedList();
+
+		sll.add(9);
+		sll.add(10);
+		assertEquals(9, sll.get(0));
+		assertEquals(10, sll.get(1));
+
+		sll.remove(0);
+		assertEquals(10, sll.get(0));
+		thrown.expect(RuntimeException.class);
+		assertEquals(10, sll.get(1));
 	}
 
 }

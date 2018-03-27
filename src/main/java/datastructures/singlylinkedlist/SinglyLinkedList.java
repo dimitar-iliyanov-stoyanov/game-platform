@@ -31,7 +31,16 @@ public class SinglyLinkedList {
 	}
 
 	public void add(int value, int index) {
-		
+		Node newNode = new Node(value);
+
+		if (index == 0) {
+			newNode.next = root;
+			root = newNode;
+		} else {
+			Node parent = getNode(index - 1);
+			newNode.next = parent.next;
+			parent.next = newNode;
+		}
 	}
 
 	public int get() {
@@ -44,15 +53,40 @@ public class SinglyLinkedList {
 	}
 
 	public int get(int index) {
-		return 0;
+		return getNode(index).data;
 	}
 
-	public void set(int valuie, int index) {
-		
+	private Node getNode(int index) {
+		if (index == 0) {
+			return root;
+		}
+
+		Node node = root;
+
+		for (int i = 0; i < index; ++i) {
+			if (node.next == null) {
+				throw new RuntimeException("Given index is bigger than the size of the list.");
+			}
+			node = node.next;
+		}
+
+		return node;
+	}
+
+	public void set(int value, int index) {
+		Node node = getNode(index);
+		node.data = value;
 	}
 
 	public void remove(int index) {
-		
+		if (index == 0) {
+			root = (root.next != null) ? root.next : null;
+			return;
+		}
+
+		Node parent = getNode(index - 1);
+		Node node = getNode(index);
+		parent.next = (node.next != null) ? node.next : null; 
 	}
 
 }
