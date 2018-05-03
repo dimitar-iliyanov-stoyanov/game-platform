@@ -2,6 +2,9 @@ package datastructures.singlylinkedlist;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -73,6 +76,17 @@ public class Client {
 		assertEquals(10, sll.get(0));
 		thrown.expect(RuntimeException.class);
 		assertEquals(10, sll.get(1));
+	}
+
+	@Test
+	public void testMap() {
+		SortedMap<String, Integer> myMap = new TreeMap<>();
+		myMap.put(null, 1);
+		myMap.put("John", null);
+		
+		System.out.println(myMap.get("John"));
+		System.out.println(myMap.get(null));
+		System.out.println(myMap.firstKey());
 	}
 
 }
